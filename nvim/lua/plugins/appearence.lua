@@ -1,10 +1,23 @@
 return {
   {
     -- Theme
-    "rebelot/kanagawa.nvim",
+    "EdenEast/nightfox.nvim",
     config = function()
-      vim.cmd.colorscheme 'kanagawa'
+      vim.cmd.colorscheme 'carbonfox'
     end,
+    opts = {
+      options = {
+        colorblind = {
+          enable = true,         -- Enable colorblind support
+          simulate_only = false, -- Only show simulated colorblind colors and not diff shifted
+          severity = {
+            protan = 0,          -- Severity [0,1] for protan (red)
+            deutan = 1,          -- Severity [0,1] for deutan (green)
+            tritan = 0,          -- Severity [0,1] for tritan (blue)
+          }
+        }
+      }
+    }
   },
   {
     -- Set lualine as statusline
@@ -13,7 +26,7 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'auto',
         component_separators = '|',
         section_separators = '',
       },
