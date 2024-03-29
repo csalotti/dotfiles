@@ -3,6 +3,7 @@
 alias python python3
 # Go to directory from the searched file
 alias sd "cd ~ && cd (find * -type d | fzf)"
+alias sdev "cd ~/Dev  && cd (find * -type d | fzf)"
 
 # Variables
 # This prevents me from installing packages with pip without being
