@@ -26,34 +26,26 @@ return {
       harpoon:setup({})
       -- REQUIRED
       -- basic telescope configuration
-      local conf = require("telescope.config").values
-      local function toggle_telescope(harpoon_files)
-        local file_paths = {}
-        for _, item in ipairs(harpoon_files.items) do
-          table.insert(file_paths, item.value)
-        end
-
-        require("telescope.pickers").new({}, {
-          prompt_title = "Harpoon",
-          finder = require("telescope.finders").new_table({
-            results = file_paths,
-          }),
-          previewer = conf.file_previewer({}),
-          sorter = conf.generic_sorter({}),
-        }):find()
-      end
-
       vim.keymap.set("n", "<leader>kl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
         { desc = "Open harpoon window" })
-      vim.keymap.set("n", "<leader>ka", function() harpoon:list():append() end,
+      vim.keymap.set("n", "<leader>ka", function() harpoon:list():add() end,
         { desc = "Add to harpoon list" })
-      vim.keymap.set("n", "<leader>k1", function() harpoon:list():select(1) end)
-      vim.keymap.set("n", "<leader>k2", function() harpoon:list():select(2) end)
-      vim.keymap.set("n", "<leader>k3", function() harpoon:list():select(3) end)
-      vim.keymap.set("n", "<leader>k4", function() harpoon:list():select(4) end)
+      for i = 0, 9 do
+        vim.keymap.set("n", string.format("<leader>k%s", i), function() harpoon:list():select(i) end,
+          { desc = string.format("Go to binding %s", i) })
+      end
       -- Toggle previous & next buffers stored within Harpoon list
       vim.keymap.set("n", "<leader>kp", function() harpoon:list():prev() end)
       vim.keymap.set("n", "<leader>kn", function() harpoon:list():next() end)
     end
   },
+  {
+    "letieu/harpoon-lualine",
+    dependencies = {
+      {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+      }
+    },
+  }
 }
