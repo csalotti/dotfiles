@@ -16,9 +16,15 @@ alias sdev "cd ~/Dev  && cd (find * -type d | fzf)"
 # See https://blog.glyph.im/2023/08/get-your-mac-python-from-python-dot-org.html#and-always-use-virtual-environments
 set -g -x PIP_REQUIRE_VIRTUALENV true
 
+## Starships
+function starship_transient_rprompt_func
+  starship module time
+end
+starship init fish | source
+enable_transience
 
 ## Inits
-starship init fish | source
+pyenv init - | source
 
 # Functionis
 source $HOME/.config/fish/functions/python.fish
@@ -27,3 +33,6 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+
+# Created by `pipx` on 2024-04-15 09:48:51
+set PATH $PATH /Users/chris/.local/bin
