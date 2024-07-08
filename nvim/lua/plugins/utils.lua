@@ -3,9 +3,27 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-  },
   { 'folke/which-key.nvim', opts = {} },
+  {
+    "toppair/peek.nvim",
+    event = { "VeryLazy" },
+    build = "deno task --quiet build:fast",
+    config = function()
+      require("peek").setup()
+      vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+      vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+    end,
+  },
+  {
+    'stevearc/oil.nvim',
+    config = function()
+      require("oil").setup({
+        view_options = {
+          show_hidden = true
+        }
+      })
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+    end
+  }
+
 }
