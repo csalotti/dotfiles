@@ -4,7 +4,7 @@ return {
     'williamboman/mason-lspconfig.nvim'
   },
   config = function()
-    local on_attach = function(_, bufnr)
+    local on_attach = function(client, bufnr)
       -- NOTE: Remember that lua is a real programming language, and as such it is possible
       -- to define small helper and utility functions so you don't have to repeat yourself
       -- many times.
@@ -45,6 +45,12 @@ return {
       vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()
       end, { desc = 'Format current buffer with LSP' })
+
+      -- Exception to use ruff and pyright conjointly
+      if client.name == 'ruff' then
+        -- Disable hover in favor of Pyright
+        client.server_capabilities.hoverProvider = false
+      end
     end
 
     -- document existing key chains
@@ -79,6 +85,8 @@ return {
     --  If you want to override the default filetypes that your language server will attach to you can
     --  define the property 'filetypes' to the map in question.
     local servers = {
+      -- c / cpp
+      clangd = {},
       -- terraform
       terraformls = {},
       tflint = {},
@@ -95,12 +103,12 @@ return {
         python = {
           analysis = {
             -- Ignore all files for analysis to exclusively use Ruff for linting
-            ignore = { '*' },
-            -- typeCheckingMode = 'off',
+            -- ignore = { '*' },
+            typeCheckingMode = 'off',
           },
         },
       },
-      ruff_lsp = {},
+      ruff = {},
       -- lua
       lua_ls = {
         Lua = {
