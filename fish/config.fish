@@ -28,6 +28,7 @@ pyenv init - | source
 
 # Functionis
 source $HOME/.config/fish/functions/python.fish
+source $HOME/.config/fish/functions/kering.fish
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
