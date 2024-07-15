@@ -25,13 +25,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- open file_browser with the path of the current buffer
-vim.keymap.set(
-  "n",
-  "<leader>fb",
-  ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-  { desc = '[F]iles [B]rowser' }
-)
+-- [ Remap yank and paste ]
+
+-- When past selected, do not replace buffer
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- next greatest remap ever : asbjornHaland
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- [[ Remove trailing whitespaces]]
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
