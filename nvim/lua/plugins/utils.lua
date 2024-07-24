@@ -3,7 +3,15 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  { 'folke/which-key.nvim', opts = {} },
+  {
+    'folke/which-key.nvim',
+    dependencies = {
+      'echasnovski/mini.icons',
+      'nvim-tree/nvim-web-devicons'
+    },
+    opts = {}
+
+  },
   {
     "toppair/peek.nvim",
     event = { "VeryLazy" },
