@@ -11,9 +11,15 @@ set -g -x PIP_REQUIRE_VIRTUALENV true
 set -g -x CXX clang++
 set -g -x CC clang
 
-set -g -x KHOME $HOME/Dev/free/kering
+# Common paths
+set -g -x DEV $HOME/Dev
+set -g -x SOFTWARE $HOME/Softwares
+set -g -x KHOME $DEV/free/kering
 
-## Starships
+# Key bindings
+set --global fish_key_bindings fish_vi_key_bindings
+
+## Starship
 function starship_transient_rprompt_func
   starship module time
 end
@@ -26,15 +32,10 @@ source $HOME/.config/fish/functions/kering.fish
 
 # PATH
 # Created by `pipx` on 2024-04-15 09:48:51
-set PATH $PATH /Users/chris/.local/bin
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/chris/Softwares/google-cloud-sdk/path.fish.inc' ]; . '/Users/chris/Softwares/google-cloud-sdk/path.fish.inc'; end
+set PATH $PATH $HOME/.local/bin
 
 # Aliases
-# Python
 
-alias python python3
 # Go to directory from the searched file
 alias sd "cd (find * -type d | fzf)"
 alias vim=nvim
@@ -49,3 +50,6 @@ alias ktrans="cd $KHOME/data-platform-infrastructure_transversal && source dags/
 alias kexplo="cd $KHOME/data-platform-infrastructure_exploration && nvim"
 alias ktodo="cd $KHOME/todo && nvim TODO.md"
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '$HOME/Softwares/google-cloud-sdk/path.fish.inc' ]; . '$HOME/Softwares/google-cloud-sdk/path.fish.inc'; end
