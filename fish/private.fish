@@ -21,7 +21,7 @@ set --global fish_key_bindings fish_vi_key_bindings
 
 ## Starship
 function starship_transient_rprompt_func
-  starship module time
+    starship module time
 end
 starship init fish | source
 enable_transience
@@ -40,7 +40,10 @@ set PATH $PATH $HOME/.local/bin
 alias sd "cd (find * -type d | fzf)"
 alias vim=nvim
 alias vimconf="nvim $HOME/.config/nvim/init.lua"
+alias fishconf="nvim $HOME/.config/fish/private.fish"
 alias tf="terraform"
+
+# Configs
 
 # Kering aliases
 alias cdkering="cd $KHOME"
@@ -49,7 +52,4 @@ alias kci="cd $KHOME/data-platform-ci_workflows && source python_ci_scripts/.ven
 alias ktrans="cd $KHOME/data-platform-infrastructure_transversal && source dags/.venv/bin/activate.fish && nvim"
 alias kexplo="cd $KHOME/data-platform-infrastructure_exploration && nvim"
 alias ktodo="cd $KHOME/todo && nvim TODO.md"
-
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '$HOME/Softwares/google-cloud-sdk/path.fish.inc' ]; . '$HOME/Softwares/google-cloud-sdk/path.fish.inc'; end
+alias gtprod="gcloud --impersonate-service-account terraformer@ke-data-transversal-prod.iam.gserviceaccount.com"
